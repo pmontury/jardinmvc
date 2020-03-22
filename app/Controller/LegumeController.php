@@ -71,12 +71,13 @@ class LegumeController extends Controller
 
          if($validation->IsValid($errors))
          {  if ($photoMandatory)
-            {  $photoDir = 'C:\xampp\htdocs\php-phil\jardinmvc\public\asset\img\\';
+            {  $view = new View;
+               $photoDir = $view->assetDir('img');
                $newFileName = date('Y_m_d_H_i') . '_' . $nameOriginal . '.' . $ext;
                // if (!is_dir($photoDir))
                // {  mkdir($photoDir);
                // }
-               $photo = $photoDir . $newFileName;
+               $photo = $photoDir.'/'.$newFileName;
                if (!move_uploaded_file($_FILES['photo']['tmp_name'], $photo))
                {  $errors['photo'] =  'Erreur lors de l\'upload';
                }
